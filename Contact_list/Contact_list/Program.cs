@@ -116,7 +116,3 @@ while (running)
 }
 
 Console.WriteLine("Cerrando la agenda...");
-
-
-
-Console.ReadKey();
