@@ -2,7 +2,6 @@
 {
     public class Contacto
     {
-   
         private int _id;
         private string _nombre;
         private string _telefono;
