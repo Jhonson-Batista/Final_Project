@@ -34,7 +34,19 @@ while (running)
                     int id = contactos.Count + 1;
                     contactos.Add(new Contacto(id, nombre, telefono, email));
 
-                    Console.WriteLine("Contacto agregado correctamente.");
+                    using (var db = new AgendaContext())
+                    {
+                        db.Contactos.Add(new Contacto
+                        {
+                            Nombre = nombre,
+                            Telefono = telefono,
+                            Email = email
+                        });
+
+                        db.SaveChanges();
+
+                        Console.WriteLine("Contacto agregado correctamente.");
+                    }
                 }
                 break;
 
@@ -76,25 +88,24 @@ while (running)
                 break;
 
             case 4:
+                using (var db = new AgendaContext())
                 {
                     Console.WriteLine("Escribe el ID del contacto a eliminar:");
                     int idEliminar = Convert.ToInt32(Console.ReadLine());
 
-                    bool eliminado = false;
+                    var contacto = db.Contactos.FirstOrDefault(c => c.Id == idEliminar);
 
-                    for (int i = 0; i < contactos.Count; i++)
+                    if (contacto != null)
                     {
-                        if (contactos[i].Id == idEliminar)
-                        {
-                            contactos.RemoveAt(i);
-                            Console.WriteLine("Contacto eliminado correctamente.");
-                            eliminado = true;
-                            break;
-                        }
-                    }
+                        db.Contactos.Remove(contacto);
+                        db.SaveChanges();
 
-                    if (!eliminado)
+                        Console.WriteLine("Contacto eliminado correctamente.");
+                    }
+                    else
+                    {
                         Console.WriteLine("No se encontró un contacto con ese ID.");
+                    }
                 }
                 break;
 

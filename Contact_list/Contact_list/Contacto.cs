@@ -2,13 +2,13 @@
 {
     public class Contacto
     {
-       
+   
         private int _id;
         private string _nombre;
         private string _telefono;
         private string _email;
 
-        
+       
         public Contacto()
         {
             _id = 0;
@@ -17,7 +17,7 @@
             _email = string.Empty;
         }
 
-       
+ 
         public Contacto(int id, string nombre, string telefono, string email)
         {
             _id = id;
@@ -26,7 +26,6 @@
             _email = email;
         }
 
-      
         public int Id
         {
             get { return _id; }
