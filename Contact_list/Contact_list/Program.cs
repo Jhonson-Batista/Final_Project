@@ -52,38 +52,48 @@ while (running)
 
             case 2:
                 {
-                    if (contactos.Count == 0)
+                    using (var db = new AgendaContext())
                     {
-                        Console.WriteLine("No hay contactos registrados.");
-                        break;
-                    }
+                        var lista = db.Contactos.ToList();
 
-                    Console.WriteLine("\n--- Lista de Contactos ---");
-                    foreach (var contacto in contactos)
-                    {
-                        Console.WriteLine(contacto.ToString());
+                        if (lista.Count == 0)
+                        {
+                            Console.WriteLine("No hay contactos registrados.");
+                            break;
+                        }
+
+                        Console.WriteLine("\n--- Lista de Contactos ---");
+                        foreach (var contacto in lista)
+                        {
+                            Console.WriteLine(contacto.ToString());
+                        }
                     }
                 }
                 break;
 
             case 3:
                 {
-                    Console.WriteLine("Escribe el nombre a buscar:");
-                    string busqueda = Console.ReadLine();
-
-                    bool encontrado = false;
-
-                    for (int i = 0; i < contactos.Count; i++)
+                    using (var db = new AgendaContext())
                     {
-                        if (contactos[i].Nombre.Contains(busqueda, StringComparison.OrdinalIgnoreCase))
-                        {
-                            Console.WriteLine(contactos[i].ToString());
-                            encontrado = true;
-                        }
-                    }
+                        Console.WriteLine("Escribe el nombre a buscar:");
+                        string busqueda = Console.ReadLine();
 
-                    if (!encontrado)
-                        Console.WriteLine("No se encontró ningún contacto con ese nombre.");
+                        bool encontrado = false;
+
+                        var lista = db.Contactos.ToList();
+
+                        for (int i = 0; i < lista.Count; i++)
+                        {
+                            if (lista[i].Nombre.Contains(busqueda, StringComparison.OrdinalIgnoreCase))
+                            {
+                                Console.WriteLine(lista[i].ToString());
+                                encontrado = true;
+                            }
+                        }
+
+                        if (!encontrado)
+                            Console.WriteLine("No se encontró ningún contacto con ese nombre.");
+                    }
                 }
                 break;
 
