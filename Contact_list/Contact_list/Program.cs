@@ -1,4 +1,5 @@
-﻿using Contact_list;
+﻿using Contact_list.BLL;
+using Contact_list.Entities;
 
 List<Contacto> contactos = new List<Contacto>();
 bool running = true;

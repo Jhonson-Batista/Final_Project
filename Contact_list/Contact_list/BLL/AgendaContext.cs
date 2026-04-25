@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Contact_list.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace Contact_list
+namespace Contact_list.BLL
 {
     public class AgendaContext : DbContext
     {

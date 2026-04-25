@@ -1,4 +1,4 @@
-﻿namespace Contact_list
+﻿namespace Contact_list.Entities
 {
     public class Contacto
     {
